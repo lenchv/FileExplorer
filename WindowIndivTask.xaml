@@ -1,0 +1,15 @@
+﻿<Window x:Class="FileExplorer.WindowIndivTask"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WindowIndivTask" Height="300" Width="300">
+    <StackPanel>
+        <Label Content="Выберете сравниваемую директорию:"/>
+        <TreeView Name="treeView1" MaxHeight="150" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  TreeViewItem.Expanded="TreeViewItem_Expanded">
+        </TreeView>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Ok" Click="Button_Click"/>
+            <Button Content="Cancel" Click="Button_Click_1"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

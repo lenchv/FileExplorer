@@ -1,0 +1,50 @@
+﻿<Page x:Class="FileExplorer.DirectoryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:FileExplorer"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="DirectoryPage">
+    <Page.Resources>
+        <local:SelectConverter x:Key="selectConverter"/>
+        <Style x:Key="clickEvent" TargetType="{x:Type ListViewItem}">
+            <EventSetter Event="MouseDoubleClick" Handler="tb_MouseDown"/>
+            <Setter Property="Foreground" Value="{Binding Path=isSelected, Converter={StaticResource selectConverter}}"/>
+        </Style>
+    </Page.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <ToolBar Grid.Row="0">
+            <Button Content="Обновить" Name="btnRefresh" Click="btnRefresh_Click"/>
+            <Button Content="Сравнение каталагов" Name="btnIndiv" 
+                    ToolTip="Shift+F2"
+                    Click="btnIndiv_Click"/>
+            <Label Name="lblPath"/>
+        </ToolBar>
+        <ListView Name="listView1" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="1"
+                  ItemsSource="{Binding}"
+                  ItemContainerStyle="{StaticResource clickEvent}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Имя файла" CellTemplate="{StaticResource FileNameTemplate}" />
+                    <GridViewColumn Header="Дата создания" DisplayMemberBinding="{Binding CreateDate}"/>
+                    <GridViewColumn Header="Время создания" DisplayMemberBinding="{Binding CreateTime}"/>
+                    <GridViewColumn Header="Размер файла" DisplayMemberBinding="{Binding FileSize}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+
+        </StackPanel>
+    </Grid>
+</Page>

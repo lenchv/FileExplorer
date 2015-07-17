@@ -1,0 +1,42 @@
+﻿<Page x:Class="FileExplorer.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:logicalDIsk ="clr-namespace:FileExplorer"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="MainPage">
+
+    <Page.Resources>
+        <DataTemplate x:Key="logicDiskTemplate" DataType="{x:Type logicalDIsk:LogicalDisk}" >
+                <Button MinWidth="150" HorizontalAlignment="Center" MouseDoubleClick="Button_MouseDoubleClick">
+                <Button.Background>
+                    <SolidColorBrush Color="Azure"/>
+                </Button.Background>
+                    <Button.Content>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Letter}"/>
+                        <TextBlock Text="{Binding FileSystem}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Размер: "/>
+                            <TextBlock Text="{Binding SizeDisk}"/>
+                            <TextBlock Text=" Mb"/>
+                        </StackPanel>
+                        <Border BorderThickness="1" BorderBrush="Blue" MinWidth="150"
+                                ToolTip="{Binding GetFreeSpace}">
+                            <Rectangle MinHeight="20" Width ="{Binding GetBuzySpace}" Fill="SkyBlue" HorizontalAlignment="Left"/>
+                        </Border>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid>
+        <ListView Name="listViewDisk"
+                  HorizontalAlignment="Left" VerticalAlignment="Top"
+                  ItemsSource="{Binding}"
+                  ItemTemplate="{StaticResource logicDiskTemplate}">
+        </ListView>
+    </Grid>
+</Page>
